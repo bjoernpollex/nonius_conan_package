@@ -9,8 +9,8 @@ class NoniusPackageTest(ConanFile):
 
     def build(self):
         cmake = CMake(self.settings)
-        self.run('cmake . %s' % cmake.command_line)
-        self.run("cmake --build . %s" % cmake.build_config)
+        self.run('cmake {0} {1}'.format(self.conanfile_directory, cmake.command_line))
+        self.run("cmake --build . {0}".format(cmake.build_config))
 
     def test(self):
         self.run(join(".", "bin", "test"))
