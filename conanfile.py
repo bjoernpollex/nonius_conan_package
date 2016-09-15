@@ -5,7 +5,7 @@ from conans.tools import download, unzip
 
 class Nonius(ConanFile):
     name = "nonius"
-    version = "1.1.2"
+    version = "1.2.0-beta.1"
     url = "https://github.com/bjoernpollex/nonius_conan_package"
     license = "CC0 1.0"
     requires = "Boost/1.60.0@lasote/stable"
@@ -23,7 +23,7 @@ class Nonius(ConanFile):
             self.options["Boost"].header_only = True
                 
     def package(self):
-        self.copy("*", dst="include", src="nonius".format(self.version))
+        self.copy("nonius.h++", dst="include", src=".")
 
     def package_info(self):
         self.cpp_info.libdirs = []

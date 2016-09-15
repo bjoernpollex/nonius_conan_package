@@ -4,7 +4,7 @@ from conans import ConanFile, CMake
 
 class NoniusPackageTest(ConanFile):
     settings = "compiler", "arch", "os"
-    requires = "nonius/1.1.2@demo/testing"
+    requires = "nonius/1.2.0-beta.1@demo/testing"
     generators = "cmake"
 
     def build(self):
