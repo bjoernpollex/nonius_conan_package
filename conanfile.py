@@ -20,7 +20,7 @@ class Nonius(ConanFile):
         unzip(zipfile_name)
         unlink(zipfile_name)
 
-    def config(self):
+    def config_options(self):
         if self.settings.compiler != "Visual Studio":
             self.options["Boost"].header_only = True
                 
