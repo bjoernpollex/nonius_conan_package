@@ -1,6 +1,6 @@
 from os import unlink
 from conans import ConanFile
-from conans.tools import download, unzip
+from conans.tools import check_sha256, download, unzip
 
 
 class Nonius(ConanFile):
@@ -14,7 +14,9 @@ class Nonius(ConanFile):
     def source(self):
         zipfile_name = "nonius-{0}.zip"
         release_url = "https://github.com/libnonius/nonius/releases/download/v{0}/nonius-{0}.zip".format(self.version)
+        sha256 = "d7542740b438725409f43f49949c98093d7d655b36c13077be4a20007d0585c0"
         download(release_url, zipfile_name)
+        check_sha256(zipfile_name, sha256)
         unzip(zipfile_name)
         unlink(zipfile_name)
 
