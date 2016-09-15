@@ -1,6 +1,6 @@
 from os import unlink
 from conans import ConanFile
-from conans.tools import download, unzip
+from conans.tools import check_sha256, download, unzip
 
 
 class Nonius(ConanFile):
@@ -14,7 +14,9 @@ class Nonius(ConanFile):
     def source(self):
         zipfile_name = "nonius-{0}.zip"
         release_url = "https://github.com/libnonius/nonius/releases/download/v{0}/nonius-{0}.zip".format(self.version)
+        sha256 = "44de210fb8de9fd7c72e47c141b0322f904e8636451263e5ed1d1bbd4f3c17e1"
         download(release_url, zipfile_name)
+        check_sha256(zipfile_name, sha256)
         unzip(zipfile_name)
         unlink(zipfile_name)
 
@@ -23,7 +25,7 @@ class Nonius(ConanFile):
             self.options["Boost"].header_only = True
                 
     def package(self):
-        self.copy("*", dst="include", src="nonius".format(self.version))
+        self.copy("nonius.h++", dst="include", src="nonius")
 
     def package_info(self):
         self.cpp_info.libdirs = []
